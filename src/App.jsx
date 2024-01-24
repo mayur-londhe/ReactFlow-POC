@@ -65,6 +65,7 @@ const LayoutFlow = () => {
       case 'blue':
 
       
+      
         newNodeColor = 'blue';
         break;
       case 'green':
