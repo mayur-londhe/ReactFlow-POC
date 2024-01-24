@@ -48,14 +48,34 @@ const LayoutFlow = () => {
 
   const onConnect = useCallback((params) => setEdges((eds) => addEdge(params, eds)), [setEdges]);
 
-  
-
-
   const onAdd = useCallback(() => {
     const userLabel = prompt("Enter Data for the new node"); 
+    const existingNode = nodes.find((node) => node.data.label === userLabel);
+    if (existingNode) {
+      alert(`Node with label "${userLabel}" already exists. Please choose a different label.`);
+      return;
+    }
+    const userColor = prompt("Select a color for the new node (red, blue, green)").toLowerCase();
+    let newNodeColor;
+
+    switch (userColor) {
+      case 'red':
+        newNodeColor = 'red';
+        break;
+      case 'blue':
+        newNodeColor = 'blue';
+        break;
+      case 'green':
+        newNodeColor = 'green';
+        break;
+      default:
+        newNodeColor = 'gray'; // Default color for invalid input
+        break;
+    }
     const newNode = {
       id: getNodeId(),
-      data: {label: userLabel},
+      data: {label: userLabel,
+              color: newNodeColor},
       position: {
         x: Math.random() * window.innerWidth - 100,
         y: Math.random() * window.innerHeight,
